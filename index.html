@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product CRUD</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the compiled CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Product Management</h1>
+
+    <!-- Form to Add a Product -->
+    <form id="addProductForm">
+        <input type="text" id="productName" placeholder="Product Name">
+        <input type="number" id="productPrice" placeholder="Product Price">
+        <button type="submit">Add Product</button>
+    </form>
+
+    <!-- Form to Update a Product -->
+    <form id="updateProductForm" style="display:none;">
+        <input type="hidden" id="updateProductId">
+        <input type="text" id="updateProductName" placeholder="New Product Name">
+        <input type="number" id="updateProductPrice" placeholder="New Product Price">
+        <button type="submit">Update Product</button>
+    </form>
+
+    <!-- List of Products -->
+    <div id="productList"></div>
+
+    <script>
+        // Add Product
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+
+            axios.post('http://127.0.0.1:5000/product', { name: name, price: price })
+                .then(function(response) {
+                    console.log(response);
+                    fetchProducts(); // Reload the product list
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        });
+
+        // Update Product - Show Form
+        function showUpdateForm(id, name, price) {
+            document.getElementById('updateProductForm').style.display = 'block';
+            document.getElementById('updateProductId').value = id;
+            document.getElementById('updateProductName').value = name;
+            document.getElementById('updateProductPrice').value = price;
+        }
+
+        // Update Product - Submit Form
+        document.getElementById('updateProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('updateProductId').value;
+            const name = document.getElementById('updateProductName').value;
+            const price = document.getElementById('updateProductPrice').value;
+
+            axios.put('http://127.0.0.1:5000/product/' + id, { name: name, price: price })
+                .then(function(response) {
+                    console.log(response);
+                    fetchProducts(); // Reload the product list
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        });
+
+        // Delete Product
+        function deleteProduct(id) {
+            axios.delete('http://127.0.0.1:5000/product/' + id)
+                .then(function(response) {
+                    console.log(response);
+                    fetchProducts(); // Reload the product list
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
+
+        // Fetch and Display Products
+        function fetchProducts() {
+            axios.get('http://127.0.0.1:5000/product')
+                .then(function(response) {
+                    const products = response.data;
+                    const productList = document.getElementById('productList');
+                    productList.innerHTML = '';
+                    products.forEach(function(product) {
+                        productList.innerHTML += `<div>${product.name} - $${product.price} 
+                            <button onclick="showUpdateForm('${product._id}', '${product.name}', ${product.price})">Update</button>
+                            <button onclick="deleteProduct('${product._id}')">Delete</button>
+                        </div>`;
+                    });
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
+
+        // Load products initially
+        fetchProducts();
+    </script>
+</body>
+</html>

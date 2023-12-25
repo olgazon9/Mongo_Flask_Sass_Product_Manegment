@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+h1 {
+  color: #3498db;
+  text-align: center;
+}
+
+form {
+  margin: 20px auto;
+  width: 300px;
+  background-color: #2ecc71;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+form input[type=text], form input[type=number] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+form button {
+  width: 100%;
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #d62c1a;
+}
+
+#productList {
+  margin: 20px auto;
+  width: 300px;
+}
+#productList div {
+  background-color: white;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#productList div button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+#productList div button:hover {
+  background-color: #217dbb;
+}/*# sourceMappingURL=style.css.map *//

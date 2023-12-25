@@ -1,0 +1,27 @@
+body {
+  background-color: #ecf0f1;
+  color: #34495e;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #6a9bbd;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+section {
+  padding: 20px;
+  background-color: #fbfcfc;
+}
+
+footer {
+  background-color: #4da371;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}/*# sourceMappingURL=main.css.map */
